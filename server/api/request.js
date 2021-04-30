@@ -28,13 +28,11 @@ const schema = Joi.object({
     medicine_name: Joi.string().min(3).required(),
     latlang: Joi.string().required(),
     uid: Joi.string().required(),
+    type: Joi.string().required(),
     //token: Joi.string().required()
 });
 
 function add(req, res){
-    //
-    var medicine_name = req.body.medicine_name;
-    var latlang = req.body.latlang;
     const { error } = schema.validate(req.body);
     if (error) return _response.apiFailed(res ,error.details[0].message)
 
@@ -87,7 +85,7 @@ async function list(req ,res ){
 
 
     }else {
-        db.query("SELECT * FROM request LIMIT "+limit+" OFFSET "+offset+" ", (err, result) => {
+        db.query("SELECT * FROM `request` INNER JOIN users ON request.uid = users.id LIMIT "+limit+" OFFSET "+offset+" ", (err, result) => {
             if (!err) {
                 return _response.apiSuccess(res, result.length+" "+responsemsg.userFound , result , {page: parseInt(page) , limit: parseInt(limit),totalDocs: totalDocs })
 
