@@ -8,7 +8,7 @@ router.get('/', (req,res)=>{
 
 require('./users')(router)
 require('./request')(router)
-
+require('./fileipload')(router)
 
 module.exports = router;
 
