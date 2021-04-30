@@ -47,7 +47,7 @@ function add(req, res){
     db.query("SELECT * FROM `users` WHERE email = '"+email+"' OR phone_number = '"+phone_number+"'", (err, result) =>{
         if (!result.length){
             console.log('User not exist')
-            db.query("INSERT INTO users SET ?)", req.body , (err, result) => {
+            db.query("INSERT INTO users SET ?", req.body , (err, result) => {
                 if (!err) {
                     return _response.apiSuccess(res, responsemsg.userSaveSuccess , result)
                 } else {
