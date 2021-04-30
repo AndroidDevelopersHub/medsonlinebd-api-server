@@ -122,22 +122,7 @@ function update(req ,res ){
         db.query("SELECT * FROM `users` WHERE id='"+req.params.id+"'", (err, result) => {
             if (!err && result.length > 0) {
 
-                formData = result[0]
-                if (req.query.phone_number){
-                    formData.phone_number = req.query.phone_number
-                }
-                if (req.query.username){
-                    formData.username = req.query.username
-                }
-                if (req.query.email){
-                    formData.email = req.query.email                }
-                if (req.query.salt){
-                    formData.salt = req.query.salt
-                }
-                if (req.query.wallet){
-                    formData.wallet = req.query.wallet
-                }
-                db.query("UPDATE users SET username ='"+formData.username+"',email ='"+formData.email+"',phone_number ='"+formData.phone_number+"',salt ='"+formData.salt+"',wallet ='"+formData.wallet+"' WHERE id = '"+req.params.id+"'" , (err , result) =>{
+                db.query("UPDATE users SET ? WHERE id = '"+req.params.id+"'" , req.body ,(err , result) =>{
                     if (!err){
                         return _response.apiSuccess(res, responsemsg.userUpdateSuccess)
                     }else{
