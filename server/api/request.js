@@ -27,6 +27,7 @@ module.exports = function (router) {
 const schema = Joi.object({
     medicine_name: Joi.string().min(3).required(),
     latlang: Joi.string().required(),
+    uid: Joi.string().required(),
     //token: Joi.string().required()
 });
 
