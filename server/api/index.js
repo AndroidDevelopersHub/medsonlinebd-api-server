@@ -7,6 +7,7 @@ router.get('/', (req,res)=>{
 })
 
 require('./users')(router)
+require('./request')(router)
 
 
 module.exports = router;
